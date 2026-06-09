@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #050b14;
+    --bg-secondary: #0a1628;
+    --accent-cyan: #06b6d4;
+    --accent-blue: #3b82f6;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a1628;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(6, 182, 212, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.6);
+  }
+
+  /* Text selection */
+  ::selection {
+    background: rgba(6, 182, 212, 0.3);
+    color: #e2e8f0;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-slate-900/60 backdrop-blur-md border border-cyan-500/[0.12] rounded-xl shadow-card;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+  }
+
+  .neon-border {
+    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.3), 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-400 to-violet-400 bg-clip-text text-transparent;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  }
+
+  .btn-primary {
+    @apply flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold rounded-lg transition-all duration-200 text-sm;
+  }
+
+  .btn-outline {
+    @apply flex items-center gap-2 px-6 py-3 border border-cyan-500/50 hover:border-cyan-400 text-cyan-400 hover:text-white font-semibold rounded-lg transition-all duration-200 hover:bg-cyan-500/10 text-sm;
+  }
+
+  .btn-ghost {
+    @apply flex items-center gap-2 px-6 py-3 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/50 text-slate-300 hover:text-white font-semibold rounded-lg transition-all duration-200 text-sm;
+  }
+
+  .tech-badge {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-mono font-medium rounded-md border;
+  }
+
+  .page-bg {
+    @apply bg-[#050b14] min-h-screen bg-grid-pattern bg-grid;
+  }
+}
+
+@layer utilities {
+  .bg-grid-dots {
+    background-image: radial-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+  }
+
+  .border-glow {
+    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), inset 0 0 20px rgba(6, 182, 212, 0.03);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover;
+  }
+}
+
+/* Architecture diagram connector lines */
+.arch-connector {
+  position: relative;
+}
+.arch-connector::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(6, 182, 212, 0.5), rgba(6, 182, 212, 0.1));
+}
+
+/* Pulse dot animation */
+@keyframes pingCustom {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.3);
+  animation: pingCustom 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.terminal-cursor::after {
+  content: '█';
+  color: #06b6d4;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
